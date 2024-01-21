@@ -1,25 +1,18 @@
 import { useEffect, useState } from "react";
 import { Form, FormConfig } from "./Form";
 
-const defaultConfig = {
-  buttonBackgroundColor: "#77DB89",
-  buttonForegroundColor: "#000",
-  submitButtonText: "Submit",
-  fileUrl: `https://media.wizards.com/2014/downloads/dnd/DMBasicRulesv.0.3_PrinterFriendly.pdf`,
-};
+const configUrl = "https://api.npoint.io/e795e27ff17f36631f3f";
 
 const App = () => {
-  const [config, setConfig] = useState<FormConfig | null>(defaultConfig);
+  const [config, setConfig] = useState<FormConfig | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   const fetchConfig = async () => {
     try {
-      // const response = fetch("");
-      // const json = (await response).json() as unknown as FormConfig;
-      // setConfig(json);
-
-      setConfig(defaultConfig);
+      const response = await fetch(configUrl);
+      const json = (await response.json()) as unknown as FormConfig;
+      setConfig(json);
     } catch (e) {
       setError("Something went wrong!");
     } finally {
