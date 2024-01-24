@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Form, FormConfig } from "./Form";
+import { Form, FormConfig } from "./components/Form";
 
-const configUrl = "https://api.npoint.io/e795e27ff17f36631f3f";
+const configUrl = "https://api.npoint.io/a7714adfed82388cb63f";
 
 const App = () => {
   const [config, setConfig] = useState<FormConfig | null>(null);
