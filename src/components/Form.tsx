@@ -20,7 +20,12 @@ export const Form = ({ config }: FormProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
 
-  const handleClick = () => {
+  const handleClose = () => {
+    setIsOpen(false);
+    setEmail("");
+  };
+
+  const handleOpen = () => {
     setIsOpen(true);
   };
 
@@ -31,14 +36,14 @@ export const Form = ({ config }: FormProps) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(email);
+    window.open(config.fileUrl, "_blank")?.focus();
   };
 
   return (
     <>
       <button
         type="button"
-        onClick={handleClick}
+        onClick={handleOpen}
         className="!px-3 !py-1.5 !text-sm !font-semibold !leading-6 !rounded-lg"
         style={{
           backgroundColor: config.buttonColour,
@@ -47,11 +52,7 @@ export const Form = ({ config }: FormProps) => {
       >
         Get it now
       </button>
-      <Dialog
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        className="relative z-10"
-      >
+      <Dialog open={isOpen} onClose={handleClose} className="relative z-10">
         <div className="!w-screen !h-screen !fixed !top-0 !left-0 !right-0 !bottom-0 !bg-zinc-800 !opacity-80 !-z-10" />
         <Dialog.Panel className="!w-full !max-w-[486px] !mx-auto !my-auto !z-10">
           <form
