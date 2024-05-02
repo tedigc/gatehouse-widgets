@@ -3,8 +3,14 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("gatehouse-widget")!).render(
+const root = document.getElementById("gatehouse-widget")!;
+
+console.log(root);
+
+const id = root.getAttribute("gate-id") || "";
+
+ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <App />
+    <App id={id} />
   </React.StrictMode>
 );

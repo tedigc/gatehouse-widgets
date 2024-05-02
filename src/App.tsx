@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Form, FormConfig } from "./components/Form";
 
-const configUrl = `https://www.gatehouse.app/api/gates/6a6ff89f-d1d8-4123-b0d0-38e90084e08d/config`;
-
-const App = () => {
+const App = ({ id }: { id: string }) => {
+  const configUrl = `https://www.gatehouse.app/api/gates/${id}/config`;
   const [config, setConfig] = useState<FormConfig | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
