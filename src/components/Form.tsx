@@ -2,14 +2,16 @@ import { Dialog } from "@headlessui/react";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export type FormConfig = {
-  fileUrl: string;
-  backgroundColour: string;
-  textColour: string;
-  buttonColour: string;
-  buttonTextColour: string;
-  formHeading: string;
-  formText: string;
-  formButtonText: string;
+  name: string;
+  downloadLink: string;
+  backgroundColor: string;
+  textColor: string;
+  buttonColor: string;
+  buttonTextColor: string;
+  title: string;
+  subheader: string;
+  text: string;
+  buttonText: string;
 };
 
 export type FormProps = {
@@ -36,7 +38,7 @@ export const Form = ({ config }: FormProps) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    window.open(config.fileUrl, "_blank")?.focus();
+    window.open(config.downloadLink, "_blank")?.focus();
   };
 
   return (
@@ -44,10 +46,10 @@ export const Form = ({ config }: FormProps) => {
       <button
         type="button"
         onClick={handleOpen}
-        className="!px-3 !py-1.5 !text-sm !font-semibold !leading-6 !rounded-lg"
+        className="!px-3 !py-1.5 !text-sm !font-semibold !leading-6 !rounded-lg text-white"
         style={{
-          backgroundColor: config.buttonColour,
-          color: config.buttonTextColour,
+          backgroundColor: config.buttonColor,
+          color: config.buttonTextColor,
         }}
       >
         Get it now
@@ -57,16 +59,16 @@ export const Form = ({ config }: FormProps) => {
         <Dialog.Panel className="!w-full !max-w-[486px] !mx-auto !my-auto !z-10">
           <form
             onSubmit={handleSubmit}
-            className="!flex !w-full !flex-col !items-stretch !rounded-lg !border !border-gray-300 !p-8"
+            className="!flex !w-full !flex-col !items-stretch !rounded-lg !border !border-gray-300 !p-8 bg-white"
             style={{
-              backgroundColor: config.backgroundColour,
-              color: config.textColour,
+              backgroundColor: config.backgroundColor,
+              color: config.textColor,
             }}
           >
-            <h1 className="!text-xl !font-extrabold !mb-2">
-              {config.formHeading}
+            {/* <h1 className="!text-xl !font-extrabold !mb-2 text-black">
+              {config.title}
             </h1>
-            <p className="!mb-8">{config.formText}</p>
+            <p className="!mb-8 text-black">{config.subheader}</p> */}
             <div className="!mb-4">
               <label
                 htmlFor="email"
@@ -88,13 +90,13 @@ export const Form = ({ config }: FormProps) => {
 
             <button
               type="submit"
-              className="!flex !min-h-[36px] !w-full !justify-center !rounded-lg !px-3 !py-2 !text-sm !font-semibold !leading-6 !focus-visible:outline !focus-visible:outline-2 !focus-visible:outline-offset-2"
+              className="!flex !min-h-[36px] !w-full !justify-center !rounded-lg !px-3 !py-2 !text-sm !font-semibold !leading-6 !focus-visible:outline !focus-visible:outline-2 !focus-visible:outline-offset-2 text-white"
               style={{
-                backgroundColor: config.buttonColour,
-                color: config.buttonTextColour,
+                backgroundColor: config.buttonColor,
+                color: config.buttonTextColor,
               }}
             >
-              {config.formButtonText}
+              {config.buttonText}
             </button>
           </form>
         </Dialog.Panel>
