@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Form, FormConfig } from "./components/Form";
 
-const App = ({ id }: { id: string }) => {
-  const configUrl = `https://www.gatehouse.app/api/gates/${id}/config`;
+const App = () => {
   const [config, setConfig] = useState<FormConfig | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   const fetchConfig = async () => {
     try {
+      const configId = document.getElementById("gatehouse-widget")?.getAttribute("gate-id");
+      const configUrl = `https://www.gatehouse.app/api/gates/${configId}/config`;
       const response = await fetch(configUrl);
       const json = (await response.json()) as unknown as { config: FormConfig };
       setConfig(json.config);
