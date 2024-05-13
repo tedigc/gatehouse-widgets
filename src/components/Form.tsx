@@ -1,5 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { ChangeEvent, FormEvent, useState } from "react";
+import Gatehouse from "../images/gatehouseText.svg";
 
 export type FormConfig = {
   name: string;
@@ -65,10 +66,10 @@ export const Form = ({ config }: FormProps) => {
               color: config.textColor,
             }}
           >
-            {/* <h1 className="!text-xl !font-extrabold !mb-2 text-black">
+            <h1 className="!text-xl !font-extrabold !mb-2 text-black tracking-wide">
               {config.title}
             </h1>
-            <p className="!mb-8 text-black">{config.subheader}</p> */}
+            <p className="!mb-8 text-black">{config.subheader}</p>
             <div className="!mb-4">
               <label
                 htmlFor="email"
@@ -90,7 +91,7 @@ export const Form = ({ config }: FormProps) => {
 
             <button
               type="submit"
-              className="!flex !min-h-[36px] !w-full !justify-center !rounded-lg !px-3 !py-2 !text-sm !font-semibold !leading-6 !focus-visible:outline !focus-visible:outline-2 !focus-visible:outline-offset-2 text-white"
+              className="!flex !min-h-[36px] !w-full !justify-center !rounded-lg !px-3 !py-2 !text-sm !font-semibold !leading-6 !focus-visible:outline !focus-visible:outline-2 !focus-visible:outline-offset-2 text-white mb-8"
               style={{
                 backgroundColor: config.buttonColor,
                 color: config.buttonTextColor,
@@ -98,6 +99,13 @@ export const Form = ({ config }: FormProps) => {
             >
               {config.buttonText}
             </button>
+            <p className="flex items-center justify-center text-sm text-gray-500">
+              Made with
+              <img
+                src={Gatehouse}
+                className="h-3 ml-2 fill-gray-800 translate-y-px"
+              />
+            </p>
           </form>
         </Dialog.Panel>
       </Dialog>
