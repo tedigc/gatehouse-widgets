@@ -27,6 +27,8 @@ export const Form = ({ config }: FormProps) => {
 
   const handleClose = () => {
     setIsOpen(false);
+    setFirstName("");
+    setLastName("");
     setEmail("");
   };
 
@@ -97,7 +99,7 @@ export const Form = ({ config }: FormProps) => {
                   type="firstName"
                   autoComplete="firstName"
                   required
-                  className="!block !w-full !rounded-lg !border-0 !text-md !px-3 !py-2 !shadow-sm !ring-1 !ring-inset !ring-gray-300 !placeholder:text-gray-400 !focus:ring-2 !focus:ring-inset"
+                  className="!block !w-full !rounded-lg !border-0 !text-sm !px-3 !py-2 !shadow-sm !ring-1 !ring-inset !ring-gray-300 !placeholder:text-gray-400 !focus:ring-2 !focus:ring-inset"
                   value={firstName}
                   onChange={handleChangeFirstName}
                 />
@@ -115,7 +117,7 @@ export const Form = ({ config }: FormProps) => {
                   type="lastName"
                   autoComplete="lastName"
                   required
-                  className="!block !w-full !rounded-lg !border-0 !text-md !px-3 !py-2 !shadow-sm !ring-1 !ring-inset !ring-gray-300 !placeholder:text-gray-400 !focus:ring-2 !focus:ring-inset"
+                  className="!block !w-full !rounded-lg !border-0 !text-sm !px-3 !py-2 !shadow-sm !ring-1 !ring-inset !ring-gray-300 !placeholder:text-gray-400 !focus:ring-2 !focus:ring-inset"
                   value={lastName}
                   onChange={handleChangeLastName}
                 />
@@ -135,7 +137,7 @@ export const Form = ({ config }: FormProps) => {
                 type="email"
                 autoComplete="email"
                 required
-                className="!block !w-full !rounded-lg !border-0 !text-md !px-3 !py-2 !shadow-sm !ring-1 !ring-inset !ring-gray-300 !placeholder:text-gray-400 !focus:ring-2 !focus:ring-inset"
+                className="!block !w-full !rounded-lg !border-0 !text-sm !px-3 !py-2 !shadow-sm !ring-1 !ring-inset !ring-gray-300 !placeholder:text-gray-400 !focus:ring-2 !focus:ring-inset"
                 value={email}
                 onChange={handleChangeEmail}
               />
