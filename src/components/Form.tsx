@@ -21,6 +21,8 @@ export type FormProps = {
 
 export const Form = ({ config }: FormProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
   const handleClose = () => {
@@ -32,7 +34,17 @@ export const Form = ({ config }: FormProps) => {
     setIsOpen(true);
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFirstName = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value;
+    setFirstName(value);
+  };
+
+  const handleChangeLastName = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value;
+    setLastName(value);
+  };
+
+  const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.currentTarget.value;
     setEmail(value);
   };
@@ -70,6 +82,46 @@ export const Form = ({ config }: FormProps) => {
               {config.title}
             </h1>
             <p className="!mb-8 text-black">{config.subheader}</p>
+
+            <div className="flex justify-between mb-4 gap-4">
+              <div>
+                <label
+                  htmlFor="firstName"
+                  className="!mb-2 !block !text-sm !font-regular !leading-[1]"
+                >
+                  First name
+                </label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="firstName"
+                  autoComplete="firstName"
+                  required
+                  className="!block !w-full !rounded-lg !border-0 !text-md !px-3 !py-2 !shadow-sm !ring-1 !ring-inset !ring-gray-300 !placeholder:text-gray-400 !focus:ring-2 !focus:ring-inset"
+                  value={firstName}
+                  onChange={handleChangeFirstName}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="!mb-2 !block !text-sm !font-regular !leading-[1]"
+                >
+                  Last name
+                </label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="lastName"
+                  autoComplete="lastName"
+                  required
+                  className="!block !w-full !rounded-lg !border-0 !text-md !px-3 !py-2 !shadow-sm !ring-1 !ring-inset !ring-gray-300 !placeholder:text-gray-400 !focus:ring-2 !focus:ring-inset"
+                  value={lastName}
+                  onChange={handleChangeLastName}
+                />
+              </div>
+            </div>
+
             <div className="!mb-4">
               <label
                 htmlFor="email"
@@ -85,7 +137,7 @@ export const Form = ({ config }: FormProps) => {
                 required
                 className="!block !w-full !rounded-lg !border-0 !text-md !px-3 !py-2 !shadow-sm !ring-1 !ring-inset !ring-gray-300 !placeholder:text-gray-400 !focus:ring-2 !focus:ring-inset"
                 value={email}
-                onChange={handleChange}
+                onChange={handleChangeEmail}
               />
             </div>
 
