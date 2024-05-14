@@ -16,10 +16,11 @@ export type FormConfig = {
 };
 
 export type FormProps = {
+  gateId: string;
   config: FormConfig;
 };
 
-export const Form = ({ config }: FormProps) => {
+export const Form = ({ gateId, config }: FormProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -51,9 +52,23 @@ export const Form = ({ config }: FormProps) => {
     setEmail(value);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    window.open(config.downloadLink, "_blank")?.focus();
+
+    try {
+      const response = await fetch("https://www.gatehouse.app/api/leads", {
+        method: "POST",
+        body: JSON.stringify({ firstName, lastName, email, gateId }),
+      });
+
+      const json = await response.json();
+      console.log(json);
+
+      window.open(config.downloadLink, "_blank")?.focus();
+      handleClose();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
