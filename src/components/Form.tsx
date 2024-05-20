@@ -1,6 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import Gatehouse from "../images/gatehouseText.svg";
+import { GatehouseText } from "./GatehouseText";
 
 export type FormConfig = {
   name: string;
@@ -170,10 +170,7 @@ export const Form = ({ gateId, config }: FormProps) => {
             </button>
             <p className="flex items-center justify-center text-sm text-gray-500">
               Made with
-              <img
-                src={Gatehouse}
-                className="h-3 ml-2 fill-gray-800 translate-y-px"
-              />
+              <GatehouseText className="h-3 ml-2 fill-gray-800 translate-y-px" />
             </p>
           </form>
         </Dialog.Panel>
