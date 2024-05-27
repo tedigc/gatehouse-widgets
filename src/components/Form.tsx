@@ -56,13 +56,10 @@ export const Form = ({ gateId, config }: FormProps) => {
     event.preventDefault();
 
     try {
-      const response = await fetch("https://www.gatehouse.app/api/leads", {
+      await fetch("https://www.gatehouse.app/api/leads", {
         method: "POST",
         body: JSON.stringify({ firstName, lastName, email, gateId }),
       });
-
-      const json = await response.json();
-      console.log(json);
 
       window.open(config.downloadLink, "_blank")?.focus();
       handleClose();

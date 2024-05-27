@@ -14,7 +14,7 @@ const App = () => {
       const response = await fetch(configUrl);
       const json = (await response.json()) as unknown as { config: FormConfig };
       setConfig(json.config);
-      setGateId(gateId ?? '');
+      setGateId(gateId ?? "");
     } catch (e) {
       setError("Something went wrong!");
     } finally {
