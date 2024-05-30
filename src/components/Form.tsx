@@ -59,7 +59,8 @@ export const Form = ({ gateId, config }: FormProps) => {
     event.preventDefault();
 
     try {
-      await fetch('https://www.gatehouse.app/api/leads', {
+      const host = import.meta.env.VITE_GATEHOUSE_HOST;
+      await fetch(`${host}/api/leads`, {
         method: 'POST',
         body: JSON.stringify({ firstName, lastName, email, gateId }),
       });
