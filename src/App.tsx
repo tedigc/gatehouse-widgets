@@ -1,22 +1,23 @@
-import { useEffect, useState } from "react";
-import { Form, FormConfig } from "./components/Form";
+import { useEffect, useState } from 'react';
+
+import { Form, FormConfig } from './components/Form';
 
 const App = () => {
-  const [gateId, setGateId] = useState<string>("");
+  const [gateId, setGateId] = useState<string>('');
   const [config, setConfig] = useState<FormConfig | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const fetchConfig = async () => {
     try {
-      const gateId = document.getElementById("gatehouse-widget")?.getAttribute("gate-id");
+      const gateId = document.getElementById('gatehouse-widget')?.getAttribute('gate-id');
       const configUrl = `https://www.gatehouse.app/api/gates/${gateId}/config`;
       const response = await fetch(configUrl);
       const json = (await response.json()) as unknown as { config: FormConfig };
       setConfig(json.config);
-      setGateId(gateId ?? "");
+      setGateId(gateId ?? '');
     } catch (e) {
-      setError("Something went wrong!");
+      setError('Something went wrong!');
     } finally {
       setIsLoading(false);
     }
