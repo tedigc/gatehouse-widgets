@@ -1,9 +1,10 @@
-import { Dialog } from '@headlessui/react';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { Dialog } from "@headlessui/react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
-import { GatehouseText } from './GatehouseText';
-import { Input } from './Input';
-import { Label } from './Label';
+import { GatehouseText } from "../svgs/GatehouseText";
+import { Input } from "./Input";
+import { Label } from "./Label";
+import { Spinner } from "./Spinner";
 
 export type FormConfig = {
   name: string;
@@ -25,15 +26,16 @@ export type FormProps = {
 
 export const Form = ({ gateId, config }: FormProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleClose = () => {
     setIsOpen(false);
-    setFirstName('');
-    setLastName('');
-    setEmail('');
+    setFirstName("");
+    setLastName("");
+    setEmail("");
   };
 
   const handleOpen = () => {
@@ -59,16 +61,19 @@ export const Form = ({ gateId, config }: FormProps) => {
     event.preventDefault();
 
     try {
+      setLoading(true);
       const host = import.meta.env.VITE_GATEHOUSE_HOST;
       await fetch(`${host}/api/leads`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify({ firstName, lastName, email, gateId }),
       });
 
-      window.open(config.downloadLink, '_blank')?.focus();
+      window.open(config.downloadLink, "_blank")?.focus();
       handleClose();
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -85,7 +90,11 @@ export const Form = ({ gateId, config }: FormProps) => {
       >
         Get it now
       </button>
-      <Dialog open={isOpen} onClose={handleClose} className="gh-fixed gh-left-0 gh-right-0 gh-top-0 gh-z-10">
+      <Dialog
+        open={isOpen}
+        onClose={handleClose}
+        className="gh-fixed gh-left-0 gh-right-0 gh-top-0 gh-z-10"
+      >
         <div className="gh-fixed gh-bottom-0 gh-left-0 gh-right-0 gh-top-0 -gh-z-10 gh-h-screen gh-w-screen gh-bg-zinc-800 gh-opacity-80" />
         <Dialog.Panel className="gh-z-10 gh-mx-auto gh-my-auto gh-mt-20 gh-w-full gh-max-w-[486px]">
           <form
@@ -96,7 +105,9 @@ export const Form = ({ gateId, config }: FormProps) => {
               color: config.textColor,
             }}
           >
-            <h1 className="gh-mb-2 gh-text-xl gh-font-extrabold gh-tracking-wide gh-text-black">{config.title}</h1>
+            <h1 className="gh-mb-2 gh-text-xl gh-font-extrabold gh-tracking-wide gh-text-black">
+              {config.title}
+            </h1>
             <p className="gh-mb-8 gh-text-black">{config.subheader}</p>
 
             <div className="gh-mb-4 gh-flex gh-justify-between gh-gap-4">
@@ -147,13 +158,22 @@ export const Form = ({ gateId, config }: FormProps) => {
 
             <button
               type="submit"
-              className="gh-mb-8 gh-flex gh-min-h-[36px] gh-w-full gh-justify-center gh-rounded-lg gh-px-3 gh-py-2 gh-text-sm gh-font-semibold gh-leading-6 gh-text-white focus-visible:gh-outline focus-visible:gh-outline-2 focus-visible:gh-outline-offset-2"
+              className="gh-mb-8 gh-flex gh-h-[40px] gh-w-full gh-justify-center gh-items-center gh-rounded-lg gh-px-3 gh-py-2 gh-text-sm gh-font-semibold gh-leading-6 gh-text-white focus-visible:gh-outline focus-visible:gh-outline-2 focus-visible:gh-outline-offset-2"
               style={{
                 backgroundColor: config.buttonColor,
                 color: config.buttonTextColor,
               }}
             >
-              {config.buttonText}
+              {loading ? (
+                <Spinner
+                  style={{
+                    borderColor: config.buttonTextColor,
+                    borderBottomColor: config.buttonColor,
+                  }}
+                />
+              ) : (
+                config.buttonText
+              )}
             </button>
             <p className="gh-flex gh-items-center gh-justify-center gh-text-sm gh-text-gray-500">
               Made with
