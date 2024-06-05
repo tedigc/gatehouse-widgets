@@ -11,16 +11,16 @@ const App = () => {
   const fetchConfig = async () => {
     try {
       const host = import.meta.env.VITE_GATEHOUSE_HOST;
-      const gateId = document.getElementById("gatehouse-widget")?.getAttribute("gate-id");
-      const configUrl = `${host}/api/gates/${gateId}/config`;
-      const response = await fetch(
-        configUrl,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      console.log(host);
+      const gateId = document
+        .getElementById("gatehouse-widget")
+        ?.getAttribute("gate-id");
+      const configUrl = `https://www.gatehouse.app/api/gates/${gateId}/config`;
+      const response = await fetch(configUrl, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const json = (await response.json()) as unknown as { config: FormConfig };
       setConfig(json.config);
       setGateId(gateId ?? "");
