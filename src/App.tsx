@@ -1,24 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { Form, FormConfig } from './components/Form';
+import { Form, FormConfig } from "./components/Form";
 
 const App = () => {
-  const [gateId, setGateId] = useState<string>('');
+  const [gateId, setGateId] = useState<string>("");
   const [config, setConfig] = useState<FormConfig | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const fetchConfig = async () => {
     try {
       const host = import.meta.env.VITE_GATEHOUSE_HOST;
-      const gateId = document.getElementById('gatehouse-widget')?.getAttribute('gate-id');
+      const gateId = document.getElementById("gatehouse-widget")?.getAttribute("gate-id");
       const configUrl = `${host}/api/gates/${gateId}/config`;
-      const response = await fetch(configUrl);
+      const response = await fetch(
+        configUrl,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const json = (await response.json()) as unknown as { config: FormConfig };
       setConfig(json.config);
-      setGateId(gateId ?? '');
+      setGateId(gateId ?? "");
     } catch (e) {
-      setError('Something went wrong!');
+      setError("Something went wrong!");
     } finally {
       setIsLoading(false);
     }
